@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Lista de Eventos</title>
+</head>
+
+<body>
+    <h1>Eventos</h1>
+
+    {% if eventos %}
+    {% for evento in eventos %}
+    <h2>{{ evento.titulo }}</h2>
+    <p><strong>Descripción:</strong> {{ evento.descripcion }}</p>
+    <p><strong>Fecha:</strong> {{ evento.fecha }}</p>
+    <p><strong>Voluntarios:</strong>
+      {% for v in evento.voluntarios.all %}
+        {{ v }}{% if not forloop.last %}, {% endif %}
+      {% empty %}
+        Sin voluntarios asignados
+      {% endfor %}
+    </p>
+    <hr>
+    {% endfor %}
+    {% else %}
+    <p>No hay eventos registrados.</p>
+    {% endif %}
+
+
+    <a href="/voluntarios/">← Voluntarios</a>
+</body>
+
+</html>

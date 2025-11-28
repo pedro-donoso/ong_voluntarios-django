@@ -1,0 +1,27 @@
+{% extends 'gestion/base.html' %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Lista de Voluntarios</h2>
+    <a href="{% url 'voluntario_create' %}" class="btn btn-primary">+ Nuevo Voluntario</a>
+</div>
+<div class="row">
+    {% for voluntario in voluntarios %}
+    <div class="col-md-4 mb-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ voluntario.nombre }}</h5>
+                <p class="card-text"><strong>Email:</strong> {{ voluntario.email }}</p>
+                {% if voluntario.telefono %}<p><strong>Teléfono:</strong> {{ voluntario.telefono }}</p>{% endif %}
+                <p><small class="text-muted">Reg: {{ voluntario.fecha_registro|date:"d/m/Y H:i" }}</small></p>
+                <div class="btn-group">
+                    <a href="{% url 'voluntario_edit' voluntario.pk %}" class="btn btn-sm btn-outline-primary">Editar</a>
+                    <a href="{% url 'voluntario_delete' voluntario.pk %}" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col-12"><p class="text-center">No hay voluntarios registrados.</p></div>
+    {% endfor %}
+</div>
+{% endblock %}

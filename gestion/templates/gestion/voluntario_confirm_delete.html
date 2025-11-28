@@ -1,0 +1,22 @@
+{% extends 'gestion/base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card border-danger">
+            <div class="card-header bg-danger text-white">
+                <h3>Confirmar Eliminación</h3>
+            </div>
+            <div class="card-body">
+                <p>¿Está seguro de eliminar al voluntario "<strong>{{ voluntario.nombre }}</strong>"?</p>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="{% url 'voluntario_list' %}" class="btn btn-secondary me-md-2">Cancelar</a>
+                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

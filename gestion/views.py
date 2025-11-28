@@ -6,8 +6,15 @@ from .models import Voluntario, Evento
 
 from .forms import VoluntarioForm, EventoForm
 
+from django.http import HttpResponse
+
 # Vistas Voluntarios
 
+def voluntarios(request):
+    return HttpResponse("<h1>Página de Voluntarios</h1><p>En desarrollo...</p>")
+
+def home(request):
+    return redirect('voluntario_list')
 
 def voluntario_list(request):
     voluntarios = Voluntario.objects.all().order_by('nombre')

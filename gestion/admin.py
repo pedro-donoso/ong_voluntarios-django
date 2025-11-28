@@ -14,7 +14,7 @@ class VoluntarioAdmin(admin.ModelAdmin):
 
 
 class EventoAdmin(admin.ModelAdmin):
-    list_display = ['titulo', 'fecha', 'get_voluntarios_count']
+    list_display = ['titulo', 'descripcion', 'fecha', 'get_voluntarios_count']
     filter_horizontal = ['voluntarios']
     list_filter = ['fecha']
 

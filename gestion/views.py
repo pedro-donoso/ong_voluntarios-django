@@ -8,9 +8,12 @@ from .forms import VoluntarioForm, EventoForm
 
 # Vistas Voluntarios
 
+
 def voluntario_list(request):
     voluntarios = Voluntario.objects.all().order_by('nombre')
-    return render(request, 'gestion/voluntario_list.html', {'voluntarios': voluntarios})
+    return render(request, 'gestion/voluntario_list.html',
+                  {'voluntarios': voluntarios})
+
 
 def voluntario_create(request):
     if request.method == 'POST':
@@ -21,7 +24,11 @@ def voluntario_create(request):
             return redirect('voluntario_list')
     else:
         form = VoluntarioForm()
-    return render(request, 'gestion/voluntario_form.html', {'form': form, 'titulo': 'Nuevo Voluntario'})
+    return render(request, 'gestion/voluntario_form.html', {
+        'form': form,
+        'titulo': 'Nuevo Voluntario'
+    })
+
 
 def voluntario_edit(request, pk):
     voluntario = get_object_or_404(Voluntario, pk=pk)
@@ -33,7 +40,11 @@ def voluntario_edit(request, pk):
             return redirect('voluntario_list')
     else:
         form = VoluntarioForm(instance=voluntario)
-    return render(request, 'gestion/voluntario_form.html', {'form': form, 'titulo': f'Editar {voluntario.nombre}'})
+    return render(request, 'gestion/voluntario_form.html', {
+        'form': form,
+        'titulo': f'Editar {voluntario.nombre}'
+    })
+
 
 def voluntario_delete(request, pk):
     voluntario = get_object_or_404(Voluntario, pk=pk)
@@ -41,13 +52,17 @@ def voluntario_delete(request, pk):
         voluntario.delete()
         messages.success(request, 'Voluntario eliminado')
         return redirect('voluntario_list')
-    return render(request, 'gestion/voluntario_confirm_delete.html', {'voluntario': voluntario})
+    return render(request, 'gestion/voluntario_confirm_delete.html',
+                  {'voluntario': voluntario})
+
 
 # Vistas Eventos
+
 
 def evento_list(request):
     eventos = Evento.objects.all()
     return render(request, 'gestion/evento_list.html', {'eventos': eventos})
+
 
 def evento_create(request):
     if request.method == 'POST':
@@ -58,7 +73,11 @@ def evento_create(request):
             return redirect('evento_list')
     else:
         form = EventoForm()
-    return render(request, 'gestion/evento_form.html', {'form': form, 'titulo': 'Nuevo Evento'})
+    return render(request, 'gestion/evento_form.html', {
+        'form': form,
+        'titulo': 'Nuevo Evento'
+    })
+
 
 def evento_edit(request, pk):
     evento = get_object_or_404(Evento, pk=pk)
@@ -70,7 +89,11 @@ def evento_edit(request, pk):
             return redirect('evento_list')
     else:
         form = EventoForm(instance=evento)
-    return render(request, 'gestion/evento_form.html', {'form': form, 'titulo': f'Editar {evento.titulo}'})
+    return render(request, 'gestion/evento_form.html', {
+        'form': form,
+        'titulo': f'Editar {evento.titulo}'
+    })
+
 
 def evento_delete(request, pk):
     evento = get_object_or_404(Evento, pk=pk)
@@ -78,4 +101,5 @@ def evento_delete(request, pk):
         evento.delete()
         messages.success(request, 'Evento eliminado')
         return redirect('evento_list')
-    return render(request, 'gestion/evento_confirm_delete.html', {'evento': evento})
+    return render(request, 'gestion/evento_confirm_delete.html',
+                  {'evento': evento})
